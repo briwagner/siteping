@@ -3,7 +3,11 @@ package siteping
 import "testing"
 
 func Test_PingSite(t *testing.T) {
-	res, err := PingSite("https://brianwagner.org", "")
+	site := Site{
+		Url:     "https://brianwagner.org",
+		Content: "",
+	}
+	res, err := PingSite(site.Url, site.Content)
 	if err != nil {
 		t.Errorf("PingSite failed. Got %s", err)
 	}
@@ -11,9 +15,9 @@ func Test_PingSite(t *testing.T) {
 		t.Errorf("PingSite failed to reach site.")
 	}
 
-	content := "Brian Wagner | Blog"
-	res, err = PingSite("https://brianwagner.org", content)
+	site.Content = "Brian Wagner | Blog"
+	res, _ = PingSite("https://brianwagner.org", site.Content)
 	if !res {
-		t.Errorf("PingSite failed to confirm content. Want %s", content)
+		t.Errorf("PingSite failed to confirm content. Want %s", site.Content)
 	}
 }

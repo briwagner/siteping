@@ -7,6 +7,11 @@ import (
 	"time"
 )
 
+type Site struct {
+	Url     string
+	Content string
+}
+
 // PingSite tries to reach a URL; pass an optional string
 // to check for specific content in the response body.
 func PingSite(url string, content string) (bool, error) {
